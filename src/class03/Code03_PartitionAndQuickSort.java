@@ -43,15 +43,18 @@ public class Code03_PartitionAndQuickSort {
 			if (arr[index] == arr[R]) {
 				index++;
 			} else if (arr[index] < arr[R]) {
-				swap(arr, index++, ++less);
+				swap(arr, index++, ++less);  //精髓，优秀啊
 			} else { // >
 				swap(arr, index, --more);
 			}
 		}
+		// L..less   less+1...more-1  more...R-1  R
+		//所以要交换 R和more，将R交换到相等区
 		swap(arr, more, R);
 		return new int[] { less + 1, more };
 	}
 
+	//快速排序1.0
 	public static void quickSort1(int[] arr) {
 		if (arr == null || arr.length < 2) {
 			return;
@@ -59,6 +62,7 @@ public class Code03_PartitionAndQuickSort {
 		process1(arr, 0, arr.length - 1);
 	}
 
+	//快速排序1.0
 	public static void process1(int[] arr, int L, int R) {
 		if (L >= R) {
 			return;

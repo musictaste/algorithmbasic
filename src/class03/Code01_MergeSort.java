@@ -1,5 +1,8 @@
 package class03;
 
+/**
+ * 归并排序
+ */
 public class Code01_MergeSort {
 
 
@@ -15,7 +18,7 @@ public class Code01_MergeSort {
 	// arr[L...R]范围上，变成有序的
 	// L...R    N    T(N) = 2*T(N/2) + O(N)  ->
 	public static void process(int[] arr, int L, int R) {
-		if (L == R) { // base case
+		if (L == R) { // base case（就是：当问题小到什么范围就不需要划分了）
 			return;
 		}
 		int mid = L + ((R - L) >> 1);
@@ -29,10 +32,12 @@ public class Code01_MergeSort {
 		int i = 0;
 		int p1 = L;
 		int p2 = M + 1;
+		//p1、p2不越级的情况下，谁下拷贝谁，如果相等，则默认拷贝右边的
 		while (p1 <= M && p2 <= R) {
 			help[i++] = arr[p1] <= arr[p2] ? arr[p1++] : arr[p2++];
 		}
 		// 要么p1越界了，要么p2越界了
+		//下面的两个while循环，只有一个会发生
 		while (p1 <= M) {
 			help[i++] = arr[p1++];
 		}
@@ -50,7 +55,7 @@ public class Code01_MergeSort {
 			return;
 		}
 		int N = arr.length;
-		int mergeSize = 1;// 当前有序的，左组长度
+		int mergeSize = 1;// 当前有序的，左组长度；一组是2倍的mergesize
 		while (mergeSize < N) { // log N
 			int L = 0;
 			// 0.... 
@@ -61,14 +66,18 @@ public class Code01_MergeSort {
 					break;
 				}
 				//  L...M   M+1...R(mergeSize)
+				//存在：右组数据不够merge长度的情况
 				int R = Math.min(M + mergeSize, N - 1);
 				merge(arr, L, M, R);
 				L = R + 1;
 			}
+			//这个判断，功能是上没有影响的，但是可以防止数组溢出
+			//int的最大值为21亿多，如果数组长度N非常逼近int的最大值，有可能merge*2就会超出int的最大值，造成无法预知的情况
+			//提前判断，防止merge超过int的最大值
 			if (mergeSize > N / 2) {
 				break;
 			}
-			mergeSize <<= 1;
+			mergeSize <<= 1;  // mergesize*2
 		}
 	}
 

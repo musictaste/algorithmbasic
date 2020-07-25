@@ -35,7 +35,9 @@ public class Code02_SmallSum {
 		int p2 = m + 1;
 		int res = 0;
 		while (p1 <= m && p2 <= r) {
+			//小和的数：右组当前数，之后有多少个数比左组的数大，则有多少个小和
 			res += arr[p1] < arr[p2] ? (r - p2 + 1) * arr[p1] : 0;
+			//当左组的数比右组的数小，则拷贝左组的数
 			help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
 		}
 		while (p1 <= m) {
