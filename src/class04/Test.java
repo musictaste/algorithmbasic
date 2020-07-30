@@ -3,7 +3,7 @@ package class04;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-
+//系统实现的堆
 public class Test {
 
 	//  负数，o1 放在上面的情况
@@ -20,7 +20,8 @@ public class Test {
 	
 	public static void main(String[] args) {
 		System.out.println("hello");
-		// 大根堆
+		// PriorityQueue默认为：小根堆
+		//现在是大根堆
 		PriorityQueue<Integer> heap = new PriorityQueue<>(new MyComp());
 		
 		heap.add(5);

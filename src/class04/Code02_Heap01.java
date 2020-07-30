@@ -5,7 +5,7 @@ public class Code02_Heap01 {
 	public static class MyMaxHeap {
 		private int[] heap;
 		private final int limit;
-		private int heapSize;
+		private int heapSize; //既表示堆的大小，又表示新加入的数字的位置
 
 		public MyMaxHeap(int limit) {
 			heap = new int[limit];
@@ -21,6 +21,7 @@ public class Code02_Heap01 {
 			return heapSize == limit;
 		}
 
+		//新增数字，然后把所有数字组织成大根堆的的形式
 		public void push(int value) {
 			if (heapSize == limit) {
 				throw new RuntimeException("heap is full");
@@ -53,9 +54,10 @@ public class Code02_Heap01 {
 		// 停：我的孩子都不再比我大；已经没孩子了
 		private void heapify(int[] arr, int index, int heapSize) {
 			int left = index * 2 + 1;
+			//当我有子节点的情况下，
 			while (left < heapSize) {
 				// 左右两个孩子中，谁大，谁把自己的下标给largest
-				// 右  ->  1) 有右孩子   && 2）右孩子的值比左孩子大才行
+				// 右节点胜出的情况  ->  1) 有右孩子   && 2）右孩子的值比左孩子大才行
 				// 否则，左
 				int largest = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
 				largest = arr[largest] > arr[index] ? largest : index;

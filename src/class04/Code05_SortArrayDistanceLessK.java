@@ -18,9 +18,11 @@ public class Code05_SortArrayDistanceLessK {
 		}
 		int i = 0;
 		for (; index < arr.length; i++, index++) {
+			//先加再弹  和   先弹再加  是一样的
 			heap.add(arr[index]);
 			arr[i] = heap.poll();
 		}
+		//当没有数字可以加入的情况下，只进行弹出操作
 		while (!heap.isEmpty()) {
 			arr[i++] = heap.poll();
 		}

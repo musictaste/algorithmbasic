@@ -9,7 +9,10 @@ public class Code03_Heap02 {
 
 	// 堆
 	public static class MyHeap<T> {
+		//因为无法实现泛型数组，所以采用了动态数组，来实现泛型数组
 		private ArrayList<T> heap;
+
+		//记录了样本在堆上的位置
 		private HashMap<T, Integer> indexMap;
 		private int heapSize;
 		private Comparator<? super T> comparator;
@@ -49,8 +52,15 @@ public class Code03_Heap02 {
 			return ans;
 		}
 
+		//堆调整
+		//引用的内存地址不变，但是对象的值改变了
 		public void resign(T value) {
 			int valueIndex = indexMap.get(value);
+
+			//heapInsert,最大堆 上升
+			//heapify 最大堆   下沉
+			//heapInsert和heapify两个操作，只会触发一个
+
 			heapInsert(valueIndex);
 			heapify(valueIndex, heapSize);
 		}
@@ -81,6 +91,8 @@ public class Code03_Heap02 {
 		private void swap(int i, int j) {
 			T o1 = heap.get(i);
 			T o2 = heap.get(j);
+
+			//heap和map两个强同步，保证样本跟heap的结构一样
 			heap.set(i, o2);
 			heap.set(j, o1);
 			indexMap.put(o1, j);
@@ -102,6 +114,7 @@ public class Code03_Heap02 {
 
 	}
 
+	//有关年龄的小根堆
 	public static class StudentComparator implements Comparator<Student> {
 
 		@Override
@@ -170,6 +183,7 @@ public class Code03_Heap02 {
 		heap.add(s5);
 		heap.add(s6);
 
+		//动态修改值，不保证有序
 		s2.age = 6;
 		s4.age = 12;
 		s5.age = 10;

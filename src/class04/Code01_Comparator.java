@@ -19,15 +19,22 @@ public class Code01_Comparator {
 		}
 	}
 
-	public static class IdAscendingComparator 
-	
-	implements Comparator<Student> {
+	//id升序的比较器
+	public static class IdAscendingComparator implements Comparator<Student> {
 
 		// 返回负数的时候，第一个参数排在前面
 		// 返回正数的时候，第二个参数排在前面
 		// 返回0的时候，谁在前面无所谓
 		@Override
 		public int compare(Student o1, Student o2) {
+			/*if(o1.id < o2.id){
+				return -1;
+			}else if(o1.id > o2.id){
+				return 1;
+			}else{
+				return 0;
+			}*/
+
 			return o1.id - o2.id;
 		}
 
@@ -60,7 +67,7 @@ public class Code01_Comparator {
 
 	}
 	
-	
+	//年龄升序；年龄相等，id升序
 	public static class AgeShengIdSheng implements Comparator<Student> {
 
 		@Override

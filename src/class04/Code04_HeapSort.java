@@ -14,9 +14,12 @@ public class Code04_HeapSort {
 //		for (int i = 0; i < arr.length; i++) { // O(N)
 //			heapInsert(arr, i); // O(logN)
 //		}
+
+		//优化
 		for (int i = arr.length - 1; i >= 0; i--) {
 			heapify(arr, i, arr.length);
 		}
+
 		int heapSize = arr.length;
 		swap(arr, 0, --heapSize);
 		// O(N*logN)
